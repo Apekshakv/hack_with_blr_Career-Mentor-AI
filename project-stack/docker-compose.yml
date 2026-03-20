@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  hindsight:
+    image: ghcr.io/vectorize-io/hindsight:latest
+    pull_policy: always
+    ports:
+      - "8888:8888"   # API
+      - "9999:9999"   # UI (http://localhost:9999 to browse memories)
+    environment:
+      - HINDSIGHT_API_LLM_PROVIDER=gemini
+      - HINDSIGHT_API_LLM_API_KEY=${GEMINI_API_KEY}
+      - HINDSIGHT_API_LLM_MODEL=gemini-2.0-flash
+      - LOG_LEVEL=info
+    volumes:
+      - hindsight_data:/home/hindsight/.pg0
+
+volumes:
+  hindsight_data:

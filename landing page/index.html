@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PathwayAI - Your Career Journey</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F9FAFB;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .btn-primary {
+            background-color: #4F46E5;
+            color: white;
+            transition: all 0.2s;
+        }
+        .btn-primary:hover {
+            background-color: #4338CA;
+            transform: translateY(-1px);
+        }
+    </style>
+</head>
+<body class="text-slate-900">
+    <div id="app"></div>
+
+    <!-- Landing Template -->
+    <script type="text/template" id="landing-template">
+        <div class="min-h-screen flex flex-col">
+            <nav class="max-w-7xl mx-auto w-full flex items-center justify-between px-6 py-6">
+                <div class="flex items-center gap-2">
+                    <div class="w-10 h-10 bg-indigo-600 rounded-lg flex items-center justify-center shadow-lg">
+                        <i data-lucide="compass" class="w-6 h-6 text-white"></i>
+                    </div>
+                    <span class="text-xl font-bold tracking-tight">PathwayAI</span>
+                </div>
+                <div class="flex items-center gap-4">
+                    <a href="#" onclick="setView('login'); return false;" class="text-sm font-semibold text-slate-600 hover:text-indigo-600">Sign In</a>
+                    <a href="#" onclick="setView('signup'); return false;" class="btn-primary px-5 py-2 rounded-lg text-sm font-semibold shadow-md inline-block">Create Account</a>
+                </div>
+            </nav>
+
+            <main class="flex-grow flex flex-col items-center justify-center px-6 text-center max-w-4xl mx-auto py-20">
+                <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight text-slate-900 mb-6">
+                    Master Your Career <br/>
+                    <span class="text-indigo-600">With AI Intelligence</span>
+                </h1>
+                <p class="text-xl text-slate-600 max-w-2xl mb-10 leading-relaxed">
+                    Track your skills, optimize your resume, and chat with an AI mentor. Everything you need to land your dream role in one place.
+                </p>
+                <div class="flex flex-wrap justify-center gap-4 mb-16">
+                    <a href="#" onclick="setView('signup'); return false;" class="btn-primary px-8 py-4 rounded-xl font-bold text-lg shadow-xl inline-block">
+                        Create Account
+                    </a>
+                    <a href="#" onclick="setView('login'); return false;" class="bg-white border border-slate-200 px-8 py-4 rounded-xl font-bold text-lg shadow-sm hover:bg-slate-50 inline-block">
+                        Sign In
+                    </a>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 flex flex-col items-center text-center">
+                        <div class="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center mb-4">
+                            <i data-lucide="layout-grid" class="w-6 h-6 text-indigo-600"></i>
+                        </div>
+                        <h3 class="font-bold mb-2">Skill Tracking</h3>
+                        <p class="text-sm text-slate-500">Visualize your growth and identify gaps.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 flex flex-col items-center text-center">
+                        <div class="w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center mb-4">
+                            <i data-lucide="file-text" class="w-6 h-6 text-emerald-600"></i>
+                        </div>
+                        <h3 class="font-bold mb-2">Resume AI</h3>
+                        <p class="text-sm text-slate-500">Instant feedback on your applications.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 flex flex-col items-center text-center">
+                        <div class="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center mb-4">
+                            <i data-lucide="message-square" class="w-6 h-6 text-amber-600"></i>
+                        </div>
+                        <h3 class="font-bold mb-2">AI Mentor</h3>
+                        <p class="text-sm text-slate-500">24/7 guidance for your career questions.</p>
+                    </div>
+                </div>
+            </main>
+
+            <footer class="py-10 text-center text-slate-400 text-sm">
+                &copy; 2026 PathwayAI. All rights reserved.
+            </footer>
+        </div>
+    </script>
+
+    <!-- Login Template -->
+    <script type="text/template" id="login-template">
+        <div class="min-h-screen flex items-center justify-center bg-slate-50 p-6">
+            <div class="max-w-md w-full bg-white p-10 rounded-3xl shadow-xl border border-slate-100">
+                <div class="text-center mb-8">
+                    <div class="inline-flex items-center justify-center w-12 h-12 bg-indigo-600 text-white rounded-xl mb-4 shadow-lg">
+                        <i data-lucide="compass" class="w-6 h-6"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold">Welcome Back</h2>
+                    <p class="text-slate-500 mt-1">Sign in with your email</p>
+                </div>
+                <form onsubmit="handleLogin(event)" class="space-y-6">
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 mb-2">Email Address</label>
+                        <input type="email" id="login-email" required placeholder="you@example.com" class="w-full border border-slate-200 rounded-xl py-3 px-4 outline-none focus:ring-2 focus:ring-indigo-500 transition-all">
+                    </div>
+                    <button type="submit" class="w-full btn-primary py-3 rounded-xl font-bold text-lg shadow-lg">
+                        Sign In
+                    </button>
+                </form>
+                <div class="mt-8 text-center">
+                    <p class="text-slate-500 text-sm">Don't have an account? <a href="#" onclick="setView('signup'); return false;" class="text-indigo-600 font-bold hover:underline">Create Account</a></p>
+                </div>
+                <button onclick="setView('landing')" class="w-full mt-6 text-slate-400 font-semibold text-sm hover:text-slate-600">
+                    Back to Home
+                </button>
+            </div>
+        </div>
+    </script>
+
+    <!-- Sign Up Template -->
+    <script type="text/template" id="signup-template">
+        <div class="min-h-screen flex items-center justify-center bg-slate-50 p-6">
+            <div class="max-w-md w-full bg-white p-10 rounded-3xl shadow-xl border border-slate-100">
+                <div class="text-center mb-8">
+                    <div class="inline-flex items-center justify-center w-12 h-12 bg-indigo-600 text-white rounded-xl mb-4 shadow-lg">
+                        <i data-lucide="user-plus" class="w-6 h-6"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold">Create Account</h2>
+                    <p class="text-slate-500 mt-1">Join PathwayAI today</p>
+                </div>
+                <form onsubmit="handleSignup(event)" class="space-y-6">
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 mb-2">Email Address</label>
+                        <input type="email" id="signup-email" required placeholder="you@example.com" class="w-full border border-slate-200 rounded-xl py-3 px-4 outline-none focus:ring-2 focus:ring-indigo-500 transition-all">
+                    </div>
+                    <button type="submit" class="w-full btn-primary py-3 rounded-xl font-bold text-lg shadow-lg">
+                        Create Account
+                    </button>
+                </form>
+                <div class="mt-8 text-center">
+                    <p class="text-slate-500 text-sm">Already have an account? <a href="#" onclick="setView('login'); return false;" class="text-indigo-600 font-bold hover:underline">Sign In</a></p>
+                </div>
+                <button onclick="setView('landing')" class="w-full mt-6 text-slate-400 font-semibold text-sm hover:text-slate-600">
+                    Back to Home
+                </button>
+            </div>
+        </div>
+    </script>
+
+    <!-- Dashboard Template -->
+    <script type="text/template" id="dashboard-template">
+        <div class="min-h-screen flex flex-col">
+            <nav class="max-w-7xl mx-auto w-full flex items-center justify-between px-6 py-6 border-b border-slate-100">
+                <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center shadow-md">
+                        <i data-lucide="compass" class="w-5 h-5 text-white"></i>
+                    </div>
+                    <span class="text-lg font-bold tracking-tight">PathwayAI</span>
+                </div>
+                <div class="flex items-center gap-6">
+                    <span id="user-display" class="text-slate-600 font-medium text-sm"></span>
+                    <button onclick="handleLogout()" class="text-slate-400 hover:text-rose-600 font-bold text-sm flex items-center gap-2">
+                        <i data-lucide="log-out" class="w-4 h-4"></i>
+                        Logout
+                    </button>
+                </div>
+            </nav>
+
+            <main class="max-w-6xl mx-auto w-full px-6 py-12">
+                <header class="mb-12">
+                    <h1 class="text-4xl font-bold text-slate-900 mb-2">Welcome to Your Dashboard</h1>
+                    <p class="text-slate-500">Select a tool to start accelerating your career.</p>
+                </header>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <a href="https://hackwthindia.vercel.app/" target="_blank" class="group bg-white p-8 rounded-3xl shadow-sm border border-slate-100 hover:shadow-xl hover:border-indigo-100 transition-all">
+                        <div class="mb-6 w-14 h-14 bg-indigo-50 rounded-2xl flex items-center justify-center group-hover:bg-indigo-600 transition-colors">
+                            <i data-lucide="layout-grid" class="w-8 h-8 text-indigo-600 group-hover:text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 group-hover:text-indigo-600">Skill Tracking</h3>
+                        <p class="text-slate-500 text-sm leading-relaxed mb-6">Visualize your growth and identify critical gaps in your technical stack.</p>
+                        <div class="flex items-center gap-2 text-indigo-600 font-bold text-xs uppercase tracking-wider">
+                            Open Tool <i data-lucide="external-link" class="w-3 h-3"></i>
+                        </div>
+                    </a>
+
+                    <a href="https://v0-resume-analysis-and-cover-letter.vercel.app/" target="_blank" class="group bg-white p-8 rounded-3xl shadow-sm border border-slate-100 hover:shadow-xl hover:border-emerald-100 transition-all">
+                        <div class="mb-6 w-14 h-14 bg-emerald-50 rounded-2xl flex items-center justify-center group-hover:bg-emerald-600 transition-colors">
+                            <i data-lucide="file-text" class="w-8 h-8 text-emerald-600 group-hover:text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 group-hover:text-emerald-600">Resume AI</h3>
+                        <p class="text-slate-500 text-sm leading-relaxed mb-6">Get instant, actionable feedback on your resume and cover letters.</p>
+                        <div class="flex items-center gap-2 text-emerald-600 font-bold text-xs uppercase tracking-wider">
+                            Open Tool <i data-lucide="external-link" class="w-3 h-3"></i>
+                        </div>
+                    </a>
+
+                    <a href="https://forever-learning-chat-main.vercel.app/" target="_blank" class="group bg-white p-8 rounded-3xl shadow-sm border border-slate-100 hover:shadow-xl hover:border-amber-100 transition-all">
+                        <div class="mb-6 w-14 h-14 bg-amber-50 rounded-2xl flex items-center justify-center group-hover:bg-amber-600 transition-colors">
+                            <i data-lucide="message-square" class="w-8 h-8 text-amber-600 group-hover:text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 group-hover:text-amber-600">Learning Chat</h3>
+                        <p class="text-slate-500 text-sm leading-relaxed mb-6">A deep knowledge AI mentor available 24/7 for your questions.</p>
+                        <div class="flex items-center gap-2 text-amber-600 font-bold text-xs uppercase tracking-wider">
+                            Open Tool <i data-lucide="external-link" class="w-3 h-3"></i>
+                        </div>
+                    </a>
+                </div>
+            </main>
+
+            <footer class="mt-auto py-12 text-center text-slate-400 text-xs">
+                &copy; 2026 PathwayAI &bull; Empowering Your Career
+            </footer>
+        </div>
+    </script>
+
+    <script>
+        const app = document.getElementById('app');
+        let currentUser = JSON.parse(localStorage.getItem('currentUser')) || null;
+        let currentView = currentUser ? 'dashboard' : 'landing';
+
+        function setView(view) {
+            currentView = view;
+            const template = document.getElementById(`${view}-template`).innerHTML;
+            app.innerHTML = template;
+            
+            if (view === 'dashboard' && currentUser) {
+                document.getElementById('user-display').textContent = currentUser.email;
+            }
+            
+            lucide.createIcons();
+            window.scrollTo(0, 0);
+        }
+
+        function handleSignup(e) {
+            e.preventDefault();
+            const email = document.getElementById('signup-email').value;
+
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            if (users.find(u => u.email === email)) {
+                alert('User already exists!');
+                return;
+            }
+
+            const newUser = { email };
+            users.push(newUser);
+            localStorage.setItem('users', JSON.stringify(users));
+            
+            currentUser = newUser;
+            localStorage.setItem('currentUser', JSON.stringify(newUser));
+            setView('dashboard');
+        }
+
+        function handleLogin(e) {
+            e.preventDefault();
+            const email = document.getElementById('login-email').value;
+
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            const user = users.find(u => u.email === email);
+
+            if (user) {
+                currentUser = user;
+                localStorage.setItem('currentUser', JSON.stringify(user));
+                setView('dashboard');
+            } else {
+                alert('User not found! Please sign up.');
+            }
+        }
+
+        function handleLogout() {
+            currentUser = null;
+            localStorage.removeItem('currentUser');
+            setView('landing');
+        }
+
+        // Initial render
+        setView(currentView);
+    </script>
+</body>
+</html>

@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 240 5% 98%;
+    --foreground: 240 10% 4%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 4%;
+    --card-shadow: 0 0 0 1px rgba(0,0,0,.04), 0 2px 4px rgba(0,0,0,.02), 0 8px 16px rgba(0,0,0,.04);
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 4%;
+
+    --primary: 226 70% 50%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 240 5% 94%;
+    --secondary-foreground: 240 10% 4%;
+
+    --muted: 240 5% 94%;
+    --muted-foreground: 240 5% 46%;
+
+    --accent: 190 90% 40%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 240 5% 90%;
+    --input: 240 5% 90%;
+    --ring: 226 70% 50%;
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 240 5% 26%;
+    --sidebar-primary: 226 70% 50%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 190 90% 40%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 240 5% 90%;
+    --sidebar-ring: 226 70% 50%;
+
+    /* Custom tokens */
+    --memory-accent: 190 90% 40%;
+    --memory-accent-light: 190 70% 95%;
+    --memory-accent-border: 190 60% 85%;
+    --surface-elevated: 0 0% 100%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Inter', system-ui, sans-serif;
+    letter-spacing: -0.02em;
+  }
+
+  code, pre {
+    font-family: 'Geist Mono', 'SF Mono', monospace;
+  }
+}
+
+@layer utilities {
+  .text-pretty {
+    text-wrap: pretty;
+  }
+  
+  .tabular-nums {
+    font-variant-numeric: tabular-nums;
+  }
+
+  @keyframes memory-pulse {
+    0% { border-left-color: hsl(190 90% 40% / 0.5); }
+    50% { border-left-color: hsl(190 90% 40% / 1); }
+    100% { border-left-color: hsl(190 90% 40% / 0.5); }
+  }
+
+  .animate-memory-pulse {
+    animation: memory-pulse 2s ease-in-out 1;
+  }
+
+  @keyframes progress-bar {
+    0% { width: 0%; }
+    50% { width: 70%; }
+    100% { width: 100%; }
+  }
+
+  .animate-progress {
+    animation: progress-bar 2s ease-in-out infinite;
+  }
+}
